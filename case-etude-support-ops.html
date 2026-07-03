@@ -133,19 +133,38 @@
         </div>
 
         <div class="two-col-grid">
-          <div class="finding-card reveal">
+          <div class="finding-card reveal span-full">
             <span class="method-tag">Méthode · chronométrage du flux existant, poste par poste</span>
             <h3>01 · Préchargement de données</h3>
-            <p>J'ai décomposé le flux de traitement d'un cas de double facturation étape par étape. Résultat : 10 à 14 des 25 minutes passent en recherche manuelle entre l'outil de paiement et le backoffice, dans deux onglets séparés. <b>C'est de la récupération d'information</b> : le candidat idéal pour l'automatisation complète. Les remboursements ambigus, qui demandent du jugement, restent traités par un agent.</p>
-            <p>Le nouveau flux déclenche un webhook dès l'assignation : les données client, transaction et session arrivent préchargées dans la conversation en 10 à 30 secondes. Le ticket se crée à la validation de l'agent, la clôture s'automatise après 2 heures d'inactivité. Temps de traitement : 25 minutes ramenées à 6-8 minutes.</p>
+            <p>J'ai décomposé le flux de traitement d'un cas de double facturation étape par étape. L'agent ouvre l'outil de paiement dans un onglet séparé, cherche le client par email, vérifie les montants, puis ouvre le backoffice pour croiser les données de session. <b>C'est de la récupération d'information</b> : le candidat idéal pour l'automatisation complète. Les remboursements ambigus et les montants au-delà de 30€ restent traités par un agent.</p>
+            <table class="compare-table">
+              <thead>
+                <tr><th>Étape</th><th>Avant</th><th>Après</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Recherche paiement + backoffice</td><td>10-14 min</td><td>0 min</td></tr>
+                <tr><td>Création du ticket</td><td>2-3 min</td><td>0 min</td></tr>
+                <tr><td>Clôture de la conversation</td><td>1-2 min</td><td>0 min</td></tr>
+                <tr class="recommended"><td><b>Temps de traitement total</b></td><td><b>~25 min</b></td><td><b>5-8 min</b></td></tr>
+              </tbody>
+            </table>
+            <p>Le nouveau flux déclenche un webhook dès l'assignation : les données client, transaction et session arrivent préchargées dans la conversation en 10 à 30 secondes. Le ticket se crée à la validation de l'agent, la clôture s'automatise après 2 heures d'inactivité.</p>
+            <p>Le risque : si l'API backoffice n'expose pas le lien entre l'identifiant de session et la conversation, l'intégration backoffice tombe. Repli : l'intégration paiement seule, qui couvre déjà les deux tiers du gain. Ce levier consomme le seul créneau d'ingénierie disponible sur la période.</p>
           </div>
 
-          <div class="finding-card reveal" style="--d:.08s">
+          <div class="finding-card reveal span-full" style="--d:.08s">
             <span class="method-tag">Méthode · lecture des conversations réouvertes une par une, au-delà du taux global</span>
             <h3>02 · Correction des workflows défaillants</h3>
-            <p>Le taux de réouverture (22%, quatre fois le niveau humain) dit qu'il y a un problème, pas lequel. En descendant dans les conversations réouvertes une par une, cinq défauts distincts ressortent. Le principal : la macro qui informe le client qu'une borne est de nouveau disponible se base sur une synchronisation qui ne tourne que toutes les 30 minutes. En cas de coupures successives, la borne retombe hors ligne avant que le client revienne, sur un statut déjà périmé. Les quatre autres défauts : pas de vérification de disponibilité réelle des connecteurs, tag trop large pour couvrir tous les cas, clôture immédiate sans fenêtre de retour, message sans reconnaissance de l'incident vécu.</p>
-            <p>Corrections associées : le message ne se déclenche qu'après confirmation du statut sur 2 cycles de synchronisation consécutifs, pour absorber les coupures successives avant d'informer le client. Le reste : détection sémantique du sujet réel, clôture différée à 1 heure d'inactivité, message réécrit en trois temps (excuse, statut, vérification de facturation).</p>
-            <p>L'ordre compte : resserrer la détection du sujet doit précéder le raccourcissement du cycle de confirmation. Sinon le système confirme le statut plus vite et envoie le message hors-sujet plus souvent, pas moins. Objectif : taux de réouverture de 22% à moins de 10%, déflection charging_failed de 76% à 90% à M6.</p>
+            <p>Le taux de réouverture du workflow qui notifie la remise en service d'une borne (22%, quatre fois le niveau humain) dit qu'il y a un problème, pas lequel. En descendant dans les conversations réouvertes une par une, cinq défauts distincts ressortent :</p>
+            <ul class="metric-list">
+              <li><b>Signal de statut</b> : la synchronisation tourne toutes les 30 minutes. En cas de coupures successives, la borne retombe hors ligne avant que le client revienne, sur un statut déjà périmé. Correction : cycle sous 5 minutes, message déclenché après 2 cycles stables consécutifs.</li>
+              <li><b>Périmètre du message</b> : la macro se déclenche sur tout le tag, y compris des cas hors indisponibilité. Correction : détection sémantique du sujet réel avant déclenchement.</li>
+              <li><b>Donnée connecteur</b> : une station donnée "opérationnelle" ne dit rien sur la disponibilité du connecteur précis utilisé par le client. Correction : vérification en temps réel au niveau du connecteur, pas de la station.</li>
+              <li><b>Fenêtre de clôture</b> : fermeture immédiate, aucune chance de retour pour le client. Correction : clôture différée à 1 heure d'inactivité.</li>
+              <li><b>Ton du message</b> : aucune reconnaissance de l'incident vécu. Correction : message réécrit en trois temps, excuse, statut, vérification de facturation.</li>
+            </ul>
+            <p>L'ordre compte : resserrer le périmètre du message doit précéder le raccourcissement du cycle de statut. Sinon le système confirme plus vite, et envoie le message hors-sujet plus souvent, pas moins.</p>
+            <p>Objectif : taux de réouverture de 22% à moins de 10%, déflection charging_failed de 76% à 90% à M6.</p>
           </div>
 
           <div class="finding-card reveal span-full" style="--d:.14s">
