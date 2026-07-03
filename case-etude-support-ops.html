@@ -48,7 +48,7 @@
         <p class="hero-body reveal" style="--d:.16s">
           Cas d'analyse sur un réseau de recharge de véhicules électriques anonymisé : 340 stations, trois marchés (France, Italie, Espagne), levée de série B. Jeu de données inconnu, fenêtre contrainte à quelques jours. Ce qui suit est le travail livré : diagnostic, refonte de workflows, modélisation économique, plan à 6 mois.
         </p>
-        <p class="reveal" style="--d:.2s;font-family:var(--font-mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted-dark);margin-bottom:12px;">Cadrage du cas</p>
+        <p class="reveal" style="--d:.2s;font-family:var(--font);font-size:10px;font-weight:500;letter-spacing:0.03em;text-transform:uppercase;color:var(--muted-dark);margin-bottom:12px;">Cadrage du cas</p>
         <div class="hero-stats reveal" style="--d:.24s">
           <div class="stat">
             <span class="stat-num">340</span>
@@ -145,12 +145,13 @@
             <h3>02 · Correction des workflows défaillants</h3>
             <p>Le taux de réouverture (22%, quatre fois le niveau humain) dit qu'il y a un problème, pas lequel. En descendant dans les conversations réouvertes une par une, cinq défauts distincts ressortent. Le principal : la macro qui informe le client qu'une borne est de nouveau disponible se base sur une synchronisation qui ne tourne que toutes les 30 minutes. En cas de coupures successives, la borne retombe hors ligne avant que le client revienne, sur un statut déjà périmé. Les quatre autres défauts : pas de vérification de disponibilité réelle des connecteurs, tag trop large pour couvrir tous les cas, clôture immédiate sans fenêtre de retour, message sans reconnaissance de l'incident vécu.</p>
             <p>Corrections associées : le message ne se déclenche qu'après confirmation du statut sur 2 cycles de synchronisation consécutifs, pour absorber les coupures successives avant d'informer le client. Le reste : détection sémantique du sujet réel, clôture différée à 1 heure d'inactivité, message réécrit en trois temps (excuse, statut, vérification de facturation).</p>
+            <p>L'ordre compte : resserrer la détection du sujet doit précéder le raccourcissement du cycle de confirmation. Sinon le système confirme le statut plus vite et envoie le message hors-sujet plus souvent, pas moins. Objectif : taux de réouverture de 22% à moins de 10%, déflection charging_failed de 76% à 90% à M6.</p>
           </div>
 
           <div class="finding-card reveal span-full" style="--d:.14s">
             <span class="method-tag">Méthode · grille de comparaison sur 4 dimensions</span>
             <h3>03 · Routing par IA plutôt que par mots-clés</h3>
-            <p>Trois options possibles pour router les conversations par langue et par sujet. Je les ai évaluées sur les mêmes critères plutôt que de choisir par intuition :</p>
+            <p>Le routing actuel se fait par mots-clés. Il casse dès que le client reformule sans les termes attendus : la conversation part dans la mauvaise file, quelqu'un doit la réaffecter à la main. Trois options possibles pour corriger ça. Je les ai évaluées sur les mêmes critères plutôt que de choisir par intuition :</p>
             <table class="compare-table">
               <thead>
                 <tr><th>Approche</th><th>Effort</th><th>Précision</th><th>Risque d'échec</th><th>Coût</th></tr>
@@ -167,7 +168,7 @@
                 </tr>
               </tbody>
             </table>
-            <p>La stack est déjà déployée : c'est de la configuration. Et surtout, la base de connaissances alimente à la fois les réponses et le routing : <b>un système unique à maintenir</b>, avec un seuil de confiance à 0,75 en dessous duquel la conversation tombe dans la boîte partagée plutôt que d'être mal assignée.</p>
+            <p>La stack est déjà déployée : c'est de la configuration. Et surtout, la base de connaissances alimente à la fois les réponses et le routing : <b>un système unique à maintenir</b>, avec un seuil de confiance à 0,75 en dessous duquel la conversation tombe dans la boîte partagée plutôt que d'être mal assignée. Si le taux de mauvais routage dépasse 15% sur les tags critiques, repli sur un préfiltre mots-clés. Objectif : taux de mauvais routage sous 10%, et une qualité de routing qui s'améliore automatiquement à mesure que la base de connaissances se met à jour, sans système séparé à maintenir.</p>
           </div>
         </div>
       </div>
@@ -181,12 +182,15 @@
           <h2>SOP et base de connaissances</h2>
         </div>
 
+        <p class="reveal" style="max-width:760px;margin:0 auto 40px;font-size:14.5px;color:#3D5568;line-height:1.82;text-align:center;">Même cause profonde, deux niveaux : le SOP corrige la justesse du process, la base de connaissances corrige ce que l'IA peut récupérer.</p>
+
         <div class="two-col-grid">
           <div class="finding-card reveal">
             <span class="method-tag">Méthode · confrontation du SOP à des scénarios réels non couverts</span>
             <h3>SOP remboursement, 6 angles morts</h3>
             <p>J'ai pris le SOP existant et testé trois situations réelles contre son flux linéaire en 5 étapes : double facturation, pré-autorisation bloquée, erreur de tarif. <b>Aucune des trois ne suit la même logique de traitement</b>, et le SOP n'en distingue aucune. Ni seuil d'autorisation, ni instruction d'outil, ni propriétaire nommé. Un même flux pour trois cas différents produit soit des remboursements non justifiés, soit des blocages inutiles.</p>
-            <p>La réécriture distingue les trois scénarios en arbres de décision séparés, avec un seuil d'autorisation à 30€ (au-delà, validation senior), cinq modèles de communication par issue possible, et une fiche de métadonnées : propriétaire, date de mise à jour, déclencheur de révision.</p>
+            <p>La réécriture distingue les trois scénarios en arbres de décision séparés : sous 30€, l'agent traite seul ; au-delà, validation senior ; en cas d'ambiguïté persistante, remontée au manager. Ce seuil de 30€ vient de la fourchette des articles en conflit (15€ contre 30€) : à confirmer avec le remboursement moyen réel et le taux de complétion des sessions. Cinq modèles de communication par issue possible, une fiche de métadonnées par scénario : propriétaire, date de mise à jour, déclencheur de révision.</p>
+            <p>Résultat : chaque étape indique l'outil et le champ exact à utiliser. Un agent BPO sans contexte préalable peut traiter n'importe lequel des trois cas dès le premier jour.</p>
           </div>
 
           <div class="finding-card reveal" style="--d:.08s">
@@ -194,6 +198,7 @@
             <h3>Gouvernance de la base de connaissances</h3>
             <p>En passant les 52 articles au crible (statut de synchronisation, seuils cités, date de dernière modification), trois problèmes ressortent : 23 seulement synchronisés avec l'IA, 9 avec des seuils contradictoires d'un article à l'autre (15€ contre 30€ pour le même cas), zéro mise à jour au lancement de la nouvelle solution de paiement. <b>Le seuil de 30€ retenu pour le SOP est directement issu de cet audit.</b></p>
             <p>La réponse : une architecture en 6 dossiers thématiques, chacun avec un sous-dossier Releases, pour que toute évolution produit ait un emplacement défini avant même que le besoin se pose. Chaque article porte un propriétaire, un statut de synchronisation IA, un statut de traduction par marché. Cinq SLAs cadrent la mise à jour : avant chaque lancement produit, résolution de conflit en 24h, revue hebdomadaire, revue mensuelle par propriétaire, audit trimestriel. Les articles sensibles (remboursement, facturation) passent en revue juridique avant publication : le droit de la consommation diffère entre la France, l'Italie et l'Espagne, non négociable sur ces 3 marchés.</p>
+            <p>Le point de bascule : chaque dossier Releases devient une porte de lancement obligatoire, articles confirmés et IA testée avant toute mise en production. Un lancement produit ne peut plus casser la base de connaissances comme la nouvelle solution de paiement l'a fait en mai. Propriétaire nommé par dossier, agents BPO en lecture seule, tout est audité : la gouvernance tient sans dépendre de la bonne volonté de chacun.</p>
           </div>
         </div>
       </div>
