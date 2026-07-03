@@ -5,10 +5,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Willy Bonneton · Portfolio</title>
   <meta name="description" content="5 ans à piloter une opération en hyper-croissance, du terrain aux systèmes. Basé à Lyon.">
+  <link rel="canonical" href="https://willy-bonneton.vercel.app/">
+
+  <link rel="icon" href="favicon-32.png" type="image/png">
+  <link rel="icon" href="favicon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Willy Bonneton">
+  <meta property="og:title" content="Willy Bonneton · Portfolio">
+  <meta property="og:description" content="5 ans à piloter une opération en hyper-croissance, du terrain aux systèmes. Basé à Lyon.">
+  <meta property="og:url" content="https://willy-bonneton.vercel.app/">
+  <meta property="og:image" content="https://willy-bonneton.vercel.app/assets/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="fr_FR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Willy Bonneton · Portfolio">
+  <meta name="twitter:description" content="5 ans à piloter une opération en hyper-croissance, du terrain aux systèmes. Basé à Lyon.">
+  <meta name="twitter:image" content="https://willy-bonneton.vercel.app/assets/og-image.jpg">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Willy Bonneton",
+    "url": "https://willy-bonneton.vercel.app/",
+    "image": "https://willy-bonneton.vercel.app/assets/willy-bonneton.jpg",
+    "jobTitle": "Opérations & Customer Care",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Lyon",
+      "addressCountry": "FR"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/in/willy-bonneton/"
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -41,8 +80,24 @@
       <div class="orb orb-2"></div>
       <div class="orb orb-3"></div>
       <div class="container hero-inner">
-        <p class="kicker reveal">Opérations · Lyon</p>
-        <h1 class="hero-title reveal" style="--d:.08s">
+        <div class="identity-card reveal">
+          <img src="assets/willy-bonneton.jpg" alt="Willy Bonneton" class="identity-photo" width="56" height="56" loading="lazy">
+          <div class="identity-text">
+            <p class="identity-name">Willy Bonneton</p>
+            <div class="identity-tags">
+              <span class="badge-pill on-dark">Customer Care</span>
+              <span class="badge-pill on-dark">Opérations (lecture/implémentation)</span>
+            </div>
+            <p class="identity-location">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.1-7-11a7 7 0 0 1 14 0c0 4.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+              Lyon
+            </p>
+          </div>
+          <a href="https://www.linkedin.com/in/willy-bonneton/" target="_blank" rel="noopener" class="identity-linkedin" aria-label="Profil LinkedIn de Willy Bonneton">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.11 20.45H3.56V9h3.55v11.45z"/></svg>
+          </a>
+        </div>
+        <h1 class="hero-title reveal" style="--d:.14s">
           Pilotage des opérations en forte croissance :<br>
           <span class="gradient-text">du terrain aux systèmes.</span>
         </h1>

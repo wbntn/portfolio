@@ -371,6 +371,91 @@ nav {
 }
 
 /* ════════════════════════════════════
+   IDENTITY CARD (hero)
+════════════════════════════════════ */
+.identity-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 24px 14px 14px;
+  border-radius: 100px;
+  background: var(--surface-dark);
+  border: 1px solid var(--border-dark);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  margin-bottom: 56px;
+  max-width: 100%;
+}
+
+.identity-photo {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.identity-text {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+}
+
+.identity-name {
+  font-family: var(--font-head);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-light);
+  line-height: 1;
+  margin: 0;
+}
+
+.identity-tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.identity-tags .badge-pill {
+  padding: 4px 12px;
+  font-size: 10px;
+}
+
+.identity-location {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--muted-dark);
+  font-weight: 500;
+  margin: 0;
+}
+.identity-location svg { width: 12px; height: 12px; flex-shrink: 0; }
+
+.identity-linkedin {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  color: var(--muted-dark);
+  flex-shrink: 0;
+  margin-left: 4px;
+  transition: background 0.2s, color 0.2s;
+}
+.identity-linkedin:hover { background: var(--accent); color: #fff; }
+.identity-linkedin svg { width: 17px; height: 17px; }
+
+@media (max-width: 560px) {
+  .identity-card { flex-wrap: wrap; border-radius: 24px; padding: 16px; gap: 14px; margin-bottom: 40px; }
+  .identity-linkedin { margin-left: auto; }
+}
+
+/* ════════════════════════════════════
    RÉALISATIONS
 ════════════════════════════════════ */
 .realisations {
