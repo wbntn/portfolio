@@ -1136,7 +1136,7 @@ footer a:hover { color: var(--text-light); }
   margin-top: 24px;
 }
 
-.metric-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 18px; max-width: 720px; }
+.metric-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 18px; margin-bottom: 18px; max-width: 720px; }
 .metric-list li { font-size: 14px; color: #3D5568; line-height: 1.6; padding-left: 22px; position: relative; }
 .metric-list li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-weight: 600; }
 .metric-list b { color: var(--text); font-weight: 600; }
