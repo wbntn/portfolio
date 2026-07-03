@@ -20,7 +20,6 @@
   --card-shadow-hover:  0 2px 8px rgba(212,107,74,0.10), 0 12px 36px rgba(26,43,56,0.10);
   --font:      'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-head: 'Space Grotesk', 'Inter', sans-serif;
-  --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
   --max: 1040px;
 }
 
@@ -117,10 +116,10 @@ img { display: block; max-width: 100%; }
   align-items: center;
   padding: 6px 16px;
   border-radius: 100px;
-  font-family: var(--font-mono);
+  font-family: var(--font);
   font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
   background: var(--accent-dim);
   border: 1px solid rgba(212,107,74,0.25);
@@ -299,10 +298,10 @@ nav {
 .hero-inner { position: relative; z-index: 1; }
 
 .kicker {
-  font-family: var(--font-mono);
+  font-family: var(--font);
   font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--muted-dark);
   margin-bottom: 28px;
@@ -364,10 +363,10 @@ nav {
 
 .stat-desc {
   display: block;
-  font-family: var(--font-mono);
+  font-family: var(--font);
   font-size: 10px;
   color: var(--muted-dark);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
   line-height: 1.4;
 }
 
@@ -412,10 +411,10 @@ nav {
 }
 
 .real-num {
-  font-family: var(--font-mono);
+  font-family: var(--font);
   font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  font-weight: 500;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 12px;
@@ -491,9 +490,9 @@ nav {
   background: var(--accent-dim);
   border: 1px solid rgba(212,107,74,0.25);
   border-radius: 8px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 600;
+  font-family: var(--font-head);
+  font-size: 12px;
+  font-weight: 700;
   color: var(--accent-deep);
   margin-bottom: 16px;
 }
@@ -509,10 +508,10 @@ nav {
 
 /* ── Outils ── */
 .outils-label {
-  font-family: var(--font-mono);
+  font-family: var(--font);
   font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  font-weight: 500;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--muted);
   margin-bottom: 20px;
@@ -527,10 +526,10 @@ nav {
 }
 
 .tool-group-label {
-  font-family: var(--font-mono);
+  font-family: var(--font);
   font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-weight: 500;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
   color: var(--muted);
   margin-bottom: 10px;
@@ -579,10 +578,10 @@ nav {
 .tool-name { font-size: 13px; font-weight: 600; white-space: nowrap; }
 
 .tool-type {
-  font-family: var(--font-mono);
+  font-family: var(--font);
   font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-weight: 500;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
   background: var(--accent-dim);
   color: var(--accent-deep);
@@ -774,10 +773,11 @@ footer a:hover { color: var(--text-light); }
 
 .result-hl-label {
   display: block;
-  font-family: var(--font-mono);
+  font-family: var(--font);
   font-size: 9px;
+  font-weight: 500;
   color: var(--muted-dark);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
   line-height: 1.35;
 }
@@ -798,10 +798,10 @@ footer a:hover { color: var(--text-light); }
 .real-tag-row .real-num { margin-bottom: 0; }
 
 .real-case-badge {
-  font-family: var(--font-mono);
+  font-family: var(--font);
   font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-weight: 500;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
   background: rgba(78, 122, 150, 0.12);
   border: 1px solid rgba(78, 122, 150, 0.28);
@@ -833,10 +833,10 @@ footer a:hover { color: var(--text-light); }
 .tag-group { margin-bottom: 24px; }
 .tag-group:last-child { margin-bottom: 0; }
 .tag-group-title {
-  font-family: var(--font-mono);
+  font-family: var(--font);
   font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-weight: 500;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
   color: var(--muted);
   margin-bottom: 12px;
@@ -858,10 +858,10 @@ footer a:hover { color: var(--text-light); }
 .tag-chip.chip-accent { background: var(--accent-dim); border-color: rgba(212,107,74,0.25); color: var(--accent-deep); }
 
 .mbti-badge {
-  font-family: var(--font-mono);
+  font-family: var(--font);
   font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-weight: 500;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
   background: rgba(78,122,150,0.12);
   border: 1px solid rgba(78,122,150,0.28);
@@ -906,11 +906,11 @@ footer a:hover { color: var(--text-light); }
 }
 
 .essay-date {
-  font-family: var(--font-mono);
+  font-family: var(--font);
   font-size: 11px;
   font-weight: 500;
   color: var(--muted);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.01em;
   flex-shrink: 0;
   width: 36px;
 }
@@ -951,10 +951,10 @@ footer a:hover { color: var(--text-light); }
 }
 
 .parcours-label {
-  font-family: var(--font-mono);
+  font-family: var(--font);
   font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  font-weight: 500;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--muted-dark);
   margin-bottom: 28px;
@@ -1005,11 +1005,11 @@ footer a:hover { color: var(--text-light); }
 }
 
 .tl-date {
-  font-family: var(--font-mono);
+  font-family: var(--font);
   font-size: 10.5px;
   font-weight: 500;
   color: var(--muted-dark);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.01em;
   flex-shrink: 0;
   width: 90px;
   padding-top: 2px;
@@ -1116,10 +1116,10 @@ footer a:hover { color: var(--text-light); }
 /* Étiquette méthode : signale la démarche avant la conclusion */
 .method-tag {
   display: block;
-  font-family: var(--font-mono);
+  font-family: var(--font);
   font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.07em;
+  font-weight: 500;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
   color: var(--accent-cool);
   margin-bottom: 12px;
@@ -1154,10 +1154,10 @@ footer a:hover { color: var(--text-light); }
   border-bottom: 1px solid var(--border);
 }
 .compare-table th {
-  font-family: var(--font-mono);
+  font-family: var(--font);
   font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-weight: 500;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
   color: var(--muted);
 }
