@@ -204,20 +204,35 @@
         <p class="reveal" style="max-width:760px;margin:0 auto 40px;font-size:14.5px;color:#3D5568;line-height:1.82;text-align:center;">Même cause profonde, deux niveaux : le SOP corrige la justesse du process, la base de connaissances corrige ce que l'IA peut récupérer.</p>
 
         <div class="two-col-grid">
-          <div class="finding-card reveal">
+          <div class="finding-card reveal span-full">
             <span class="method-tag">Méthode · confrontation du SOP à des scénarios réels non couverts</span>
             <h3>SOP remboursement, 6 angles morts</h3>
-            <p>J'ai pris le SOP existant et testé trois situations réelles contre son flux linéaire en 5 étapes : double facturation, pré-autorisation bloquée, erreur de tarif. <b>Aucune des trois ne suit la même logique de traitement</b>, et le SOP n'en distingue aucune. Ni seuil d'autorisation, ni instruction d'outil, ni propriétaire nommé. Un même flux pour trois cas différents produit soit des remboursements non justifiés, soit des blocages inutiles.</p>
-            <p>La réécriture distingue les trois scénarios en arbres de décision séparés : sous 30€, l'agent traite seul ; au-delà, validation senior ; en cas d'ambiguïté persistante, remontée au manager. Ce seuil de 30€ vient de la fourchette des articles en conflit (15€ contre 30€) : à confirmer avec le remboursement moyen réel et le taux de complétion des sessions. Cinq modèles de communication par issue possible, une fiche de métadonnées par scénario : propriétaire, date de mise à jour, déclencheur de révision.</p>
-            <p>Résultat : chaque étape indique l'outil et le champ exact à utiliser. Un agent BPO sans contexte préalable peut traiter n'importe lequel des trois cas dès le premier jour.</p>
+            <p>J'ai pris le SOP existant et testé trois situations réelles contre son flux linéaire en 5 étapes. <b>Aucune des trois ne suit la même logique de traitement</b>, et le SOP n'en distingue aucune :</p>
+            <ul class="metric-list">
+              <li><b>Double facturation</b> : le client est débité deux fois pour la même session, souvent après une coupure réseau qui relance le paiement. Traitement : identifier la transaction dupliquée, rembourser l'excédent.</li>
+              <li><b>Pré-autorisation bloquée</b> : le montant est réservé mais jamais capturé, il reste bloqué au-delà du délai normal. Traitement : libérer l'autorisation, sans mouvement de remboursement.</li>
+              <li><b>Erreur de tarif</b> : le tarif appliqué ne correspond pas à la grille en vigueur. Traitement : recalculer l'écart, ajuster le montant.</li>
+            </ul>
+            <p>Le SOP existant n'a ni seuil d'autorisation, ni instruction d'outil, ni propriétaire nommé pour distinguer ces trois cas. Un même flux pour trois opérations différentes produit soit un remboursement là où il fallait juste relâcher une autorisation, soit un blocage sur un cas qui ne demandait qu'un recalcul.</p>
+            <p>La réécriture distingue les trois scénarios en arbres de décision séparés, avec une autorisation à trois paliers : sous 30€, l'agent traite seul ; au-delà, validation senior ; en cas d'ambiguïté persistante, remontée au manager. Ce seuil de 30€ vient de la fourchette des articles en conflit (15€ contre 30€) : à confirmer avec le remboursement moyen réel et le taux de complétion des sessions. Cinq modèles de communication par issue possible, une fiche de métadonnées par scénario : propriétaire, date de mise à jour, déclencheur de révision.</p>
+            <p>Chaque arbre pointe l'outil et le champ exact. Pour une pré-autorisation bloquée, l'agent va chercher le statut "hold" dans le backoffice et clique sur "release", pas "refund". Avant la réécriture, rien n'empêchait de traiter ce cas comme un remboursement classique, et de l'argent part alors que rien n'avait été prélevé. Ce type d'erreur devient structurellement impossible.</p>
           </div>
 
-          <div class="finding-card reveal" style="--d:.08s">
+          <div class="finding-card reveal span-full" style="--d:.08s">
             <span class="method-tag">Méthode · audit exhaustif des 52 articles, un par un</span>
             <h3>Gouvernance de la base de connaissances</h3>
             <p>En passant les 52 articles au crible (statut de synchronisation, seuils cités, date de dernière modification), trois problèmes ressortent : 23 seulement synchronisés avec l'IA, 9 avec des seuils contradictoires d'un article à l'autre (15€ contre 30€ pour le même cas), zéro mise à jour au lancement de la nouvelle solution de paiement. <b>Le seuil de 30€ retenu pour le SOP est directement issu de cet audit.</b></p>
-            <p>La réponse : une architecture en 6 dossiers thématiques, chacun avec un sous-dossier Releases, pour que toute évolution produit ait un emplacement défini avant même que le besoin se pose. Chaque article porte un propriétaire, un statut de synchronisation IA, un statut de traduction par marché. Cinq SLAs cadrent la mise à jour : avant chaque lancement produit, résolution de conflit en 24h, revue hebdomadaire, revue mensuelle par propriétaire, audit trimestriel. Les articles sensibles (remboursement, facturation) passent en revue juridique avant publication : le droit de la consommation diffère entre la France, l'Italie et l'Espagne, non négociable sur ces 3 marchés.</p>
-            <p>Le point de bascule : chaque dossier Releases devient une porte de lancement obligatoire, articles confirmés et IA testée avant toute mise en production. Un lancement produit ne peut plus casser la base de connaissances comme la nouvelle solution de paiement l'a fait en mai. Propriétaire nommé par dossier, agents BPO en lecture seule, tout est audité : la gouvernance tient sans dépendre de la bonne volonté de chacun.</p>
+            <p>L'architecture : un dossier par tag déjà identifié au diagnostic (station_access/subscription, general_inquiry/app_bug, charging_failed, payment_issue, refund_request, invoice), chacun avec un sous-dossier Releases : l'endroit où les changements KB d'un prochain lancement produit se préparent avant le go-live.</p>
+            <p>Propriété individuelle : un propriétaire nommé par dossier et par article, responsable de sa justesse. Contrôle collectif : agents BPO en lecture seule, flag de conflit visible par tous les éditeurs, logs d'audit complets sur toute modification.</p>
+            <p>Cinq déclencheurs cadrent la mise à jour :</p>
+            <ul class="metric-list">
+              <li><b>Avant chaque lancement produit</b> : articles confirmés et IA testée, condition de passage en production.</li>
+              <li><b>Conflit détecté</b> : résolution sous 24h.</li>
+              <li><b>Pic d'escalade sur un tag</b> : revue hebdomadaire du dossier concerné.</li>
+              <li><b>Par propriétaire thématique</b> : revue mensuelle.</li>
+              <li><b>Sur l'ensemble des 52 articles</b> : audit trimestriel complet.</li>
+            </ul>
+            <p>Le point de bascule : la porte de lancement Releases empêche qu'un futur lancement casse la base de connaissances comme la nouvelle solution de paiement l'a fait en mai. La gouvernance tient sur le système, pas sur la bonne volonté de chacun.</p>
           </div>
         </div>
       </div>
