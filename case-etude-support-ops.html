@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diagnostic et refonte d'une opération Support à l'échelle · Willy Bonneton</title>
+  <meta name="description" content="Cas d'analyse Customer Care Ops : diagnostic data, refonte de workflows et plan de transformation sur 6 mois. Réseau de recharge EV anonymisé.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header id="site-header">
+    <div class="container">
+      <nav>
+        <a href="index.html" class="nav-brand">Willy Bonneton</a>
+        <div class="nav-links">
+          <a href="index.html#realisations">Réalisations</a>
+          <a href="index.html#methode">Méthode</a>
+          <a href="about.html">À propos</a>
+          <a href="https://www.linkedin.com/in/willy-bonneton/" target="_blank" rel="noopener" class="nav-cta">LinkedIn ↗</a>
+        </div>
+        <button class="mobile-menu-btn" aria-label="Menu" aria-expanded="false">☰</button>
+      </nav>
+    </div>
+    <div class="mobile-menu">
+      <a href="index.html#realisations">Réalisations</a>
+      <a href="index.html#methode">Méthode</a>
+      <a href="about.html">À propos</a>
+      <a href="https://www.linkedin.com/in/willy-bonneton/" target="_blank" rel="noopener" class="nav-cta">LinkedIn ↗</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero case-hero">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="container hero-inner">
+        <p class="kicker reveal">Cas d'analyse</p>
+        <h1 class="hero-title reveal" style="--d:.08s">
+          Diagnostic et refonte d'une<br>
+          <span class="gradient-text">opération Support à l'échelle.</span>
+        </h1>
+        <p class="hero-body reveal" style="--d:.16s">
+          Cas d'analyse sur un réseau de recharge de véhicules électriques anonymisé : 340 stations, trois marchés (France, Italie, Espagne), levée de série B. Jeu de données inconnu, fenêtre contrainte à quelques jours. Ce qui suit est le travail livré : diagnostic, refonte de workflows, modélisation économique, plan à 6 mois.
+        </p>
+        <p class="reveal" style="--d:.2s;font-family:var(--font-mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted-dark);margin-bottom:12px;">Cadrage du cas</p>
+        <div class="hero-stats reveal" style="--d:.24s">
+          <div class="stat">
+            <span class="stat-num">340</span>
+            <span class="stat-desc">stations couvertes</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">3</span>
+            <span class="stat-desc">marchés · FR IT ES</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">15K€</span>
+            <span class="stat-desc">budget · 2 FTE · 1 slot eng.</span>
+          </div>
+        </div>
+        <div class="reveal" style="--d:.32s">
+          <a href="#diagnostic" class="gradient-btn">Voir le diagnostic <span style="font-size:16px">↓</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTEXTE -->
+    <section class="section-light" id="contexte">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="badge-pill">Contexte</span>
+          <h2>Un lancement qui a cassé un signal de confiance</h2>
+        </div>
+
+        <div class="finding-card reveal" style="max-width:760px;margin:0 auto;">
+          <p>En mai 2025, l'entreprise lance une nouvelle solution de paiement dynamique sur l'ensemble de son réseau. En deux mois, le taux de déviation IA (part des conversations résolues sans agent humain) chute de 58-62% à 30-33%. Le coût par conversation explose. Le CSAT, lui, affiche 85%, stable en apparence.</p>
+          <p>Le réflexe du Head of Customer Care est d'y voir de la saisonnalité, avec un retour à la normale attendu en septembre. La base de connaissances n'avait pourtant pas été mise à jour avant le lancement : 14 nouveaux codes de déclin de paiement, une nouvelle matrice de remboursement, rien de tout ça n'était accessible à l'IA.</p>
+          <div class="case-note">
+            Cadrage du cas : diagnostiquer, automatiser, restructurer et livrer un plan de transformation sur 6 mois, avec 15 000€ de budget, 2 FTE et un seul créneau d'ingénierie disponible sur la période.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIAGNOSTIC -->
+    <section class="section-alt" id="diagnostic">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="badge-pill">Diagnostic</span>
+          <h2>Deux signaux, une seule cause</h2>
+        </div>
+
+        <div class="two-col-grid">
+          <div class="finding-card reveal">
+            <span class="method-tag">Méthode · test croisé sur 2 signaux, saisonnalité contre glissement de volume</span>
+            <h3>Le glissement de volume derrière la chute</h3>
+            <p>Si la baisse était saisonnière, deux choses seraient vraies : tous les types de conversation reculeraient de façon comparable, et le taux remonterait en juillet-août. J'ai testé les deux. <b>Aucune des deux conditions ne se vérifie dans les données.</b></p>
+            <p>Les tags <em>payment_issue</em> et <em>refund_request</em> passent de 43% à 63% du volume total entre janvier-mars et avril-juin, soit +20 points. Ce sont les deux tags à la plus faible déviation de tout le catalogue : 30% et 14%. L'IA n'était pas réentraînée sur la nouvelle solution de paiement. Elle n'avait rien à récupérer. Elle escaladait tout.</p>
+          </div>
+
+          <div class="finding-card reveal" style="--d:.08s">
+            <span class="method-tag">Méthode · lecture croisée de 3 signaux qui contredisent le KPI affiché</span>
+            <h3>Le biais caché du CSAT</h3>
+            <p>Le 85% affiché est resté stable. Trois autres signaux, sur la même période, ne le sont pas : le taux de réponse aux enquêtes chute de 34% à 9%, le temps moyen de résolution passe de 247 à 457 minutes (+85%), le taux d'escalade IA double (5% à 12%). <b>Un CSAT qui monte pendant que le temps de résolution explose signale un biais de mesure.</b></p>
+            <p>Le mécanisme : les conversations traitées par l'IA sont courtes, automatisées, personne n'est investi dans le résultat, les clients ne prennent pas la peine de noter. Ce qui reste dans le pool de notation, ce sont les cas humains, complexes, résolus favorablement. Le 85% mesure ce sous-groupe. Pas l'expérience globale.</p>
+          </div>
+        </div>
+
+        <div class="reveal" style="--d:.14s;max-width:760px;margin:40px auto 0;">
+          <p style="font-size:14.5px;color:#3D5568;line-height:1.82;">À partir de ce diagnostic, j'ai proposé cinq métriques de remplacement, pensées pour ne pas dépendre de la volonté du client à répondre à un sondage :</p>
+          <ul class="metric-list">
+            <li><b>Déviation par tag</b> : isole les thématiques en difficulté avant que l'agrégat ne se dégrade</li>
+            <li><b>Taux d'escalade IA</b> : mesure directe de l'échec, sans dépendre du comportement client</li>
+            <li><b>Vrai taux de résolution IA</b> : une conversation IA réouverte sous 48h n'est pas résolue</li>
+            <li><b>CSAT IA et CSAT humain, suivis séparément</b> : les agréger masque le signal le plus utile</li>
+            <li><b>Taux de contact hebdomadaire</b> : le signal le plus en amont, avant même l'intervention de l'IA</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- LEVIERS -->
+    <section class="section-light" id="leviers">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="badge-pill">Automatisation</span>
+          <h2>Trois leviers, trois catégories de perte</h2>
+        </div>
+
+        <div class="two-col-grid">
+          <div class="finding-card reveal">
+            <span class="method-tag">Méthode · chronométrage du flux existant, poste par poste</span>
+            <h3>01 · Préchargement de données</h3>
+            <p>J'ai décomposé le flux de traitement d'un cas de double facturation étape par étape. Résultat : 10 à 14 des 25 minutes passent en recherche manuelle entre l'outil de paiement et le backoffice, dans deux onglets séparés. <b>C'est de la récupération d'information</b> : le candidat idéal pour l'automatisation complète. Les remboursements ambigus, qui demandent du jugement, restent traités par un agent.</p>
+            <p>Le nouveau flux déclenche un webhook dès l'assignation : les données client, transaction et session arrivent préchargées dans la conversation en 10 à 30 secondes. Le ticket se crée à la validation de l'agent, la clôture s'automatise après 2 heures d'inactivité. Temps de traitement : 25 minutes ramenées à 6-8 minutes.</p>
+          </div>
+
+          <div class="finding-card reveal" style="--d:.08s">
+            <span class="method-tag">Méthode · lecture des conversations réouvertes une par une, au-delà du taux global</span>
+            <h3>02 · Correction des workflows défaillants</h3>
+            <p>Le taux de réouverture (22%, quatre fois le niveau humain) dit qu'il y a un problème, pas lequel. En descendant dans les conversations réouvertes une par une, cinq défauts distincts ressortent. Le principal : la macro qui informe le client qu'une borne est de nouveau disponible se base sur une synchronisation qui ne tourne que toutes les 30 minutes. En cas de coupures successives, la borne retombe hors ligne avant que le client revienne, sur un statut déjà périmé. Les quatre autres défauts : pas de vérification de disponibilité réelle des connecteurs, tag trop large pour couvrir tous les cas, clôture immédiate sans fenêtre de retour, message sans reconnaissance de l'incident vécu.</p>
+            <p>Corrections associées : le message ne se déclenche qu'après confirmation du statut sur 2 cycles de synchronisation consécutifs, pour absorber les coupures successives avant d'informer le client. Le reste : détection sémantique du sujet réel, clôture différée à 1 heure d'inactivité, message réécrit en trois temps (excuse, statut, vérification de facturation).</p>
+          </div>
+
+          <div class="finding-card reveal span-full" style="--d:.14s">
+            <span class="method-tag">Méthode · grille de comparaison sur 4 dimensions</span>
+            <h3>03 · Routing par IA plutôt que par mots-clés</h3>
+            <p>Trois options possibles pour router les conversations par langue et par sujet. Je les ai évaluées sur les mêmes critères plutôt que de choisir par intuition :</p>
+            <table class="compare-table">
+              <thead>
+                <tr><th>Approche</th><th>Effort</th><th>Précision</th><th>Risque d'échec</th><th>Coût</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Mots-clés (natif)</td><td>Faible</td><td>Faible</td><td>Élevé : casse sur le paraphrasage</td><td>Inclus</td>
+                </tr>
+                <tr class="recommended">
+                  <td>Routing IA (retenu)</td><td>Modéré : configuration</td><td>Élevée : sémantique</td><td>Faible : repli sur boîte partagée</td><td>Faible à modéré</td>
+                </tr>
+                <tr>
+                  <td>Développement custom</td><td>Élevé : build + infra</td><td>Élevée mais dérive dans le temps</td><td>Élevé : points de rupture multiples</td><td>Modéré, mais consomme le slot ingénierie</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>La stack est déjà déployée : c'est de la configuration. Et surtout, la base de connaissances alimente à la fois les réponses et le routing : <b>un système unique à maintenir</b>, avec un seuil de confiance à 0,75 en dessous duquel la conversation tombe dans la boîte partagée plutôt que d'être mal assignée.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS & GOUVERNANCE -->
+    <section class="section-alt" id="gouvernance">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="badge-pill">Process</span>
+          <h2>SOP et base de connaissances</h2>
+        </div>
+
+        <div class="two-col-grid">
+          <div class="finding-card reveal">
+            <span class="method-tag">Méthode · confrontation du SOP à des scénarios réels non couverts</span>
+            <h3>SOP remboursement, 6 angles morts</h3>
+            <p>J'ai pris le SOP existant et testé trois situations réelles contre son flux linéaire en 5 étapes : double facturation, pré-autorisation bloquée, erreur de tarif. <b>Aucune des trois ne suit la même logique de traitement</b>, et le SOP n'en distingue aucune. Ni seuil d'autorisation, ni instruction d'outil, ni propriétaire nommé. Un même flux pour trois cas différents produit soit des remboursements non justifiés, soit des blocages inutiles.</p>
+            <p>La réécriture distingue les trois scénarios en arbres de décision séparés, avec un seuil d'autorisation à 30€ (au-delà, validation senior), cinq modèles de communication par issue possible, et une fiche de métadonnées : propriétaire, date de mise à jour, déclencheur de révision.</p>
+          </div>
+
+          <div class="finding-card reveal" style="--d:.08s">
+            <span class="method-tag">Méthode · audit exhaustif des 52 articles, un par un</span>
+            <h3>Gouvernance de la base de connaissances</h3>
+            <p>En passant les 52 articles au crible (statut de synchronisation, seuils cités, date de dernière modification), trois problèmes ressortent : 23 seulement synchronisés avec l'IA, 9 avec des seuils contradictoires d'un article à l'autre (15€ contre 30€ pour le même cas), zéro mise à jour au lancement de la nouvelle solution de paiement. <b>Le seuil de 30€ retenu pour le SOP est directement issu de cet audit.</b></p>
+            <p>La réponse : une architecture en 6 dossiers thématiques, chacun avec un sous-dossier Releases, pour que toute évolution produit ait un emplacement défini avant même que le besoin se pose. Chaque article porte un propriétaire, un statut de synchronisation IA, un statut de traduction par marché. Cinq SLAs cadrent la mise à jour : avant chaque lancement produit, résolution de conflit en 24h, revue hebdomadaire, revue mensuelle par propriétaire, audit trimestriel. Les articles sensibles (remboursement, facturation) passent en revue juridique avant publication : le droit de la consommation diffère entre la France, l'Italie et l'Espagne, non négociable sur ces 3 marchés.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRAJECTOIRE -->
+    <section class="dark-section" id="trajectoire">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="badge-pill on-dark">Plan à 6 mois</span>
+          <h2>Une trajectoire, un seul indicateur de synthèse</h2>
+        </div>
+
+        <p class="dark-p reveal">
+          Le coût par conversation est le fil rouge de la trajectoire. En janvier 2026, la moyenne est de 6,20€ : 0,99€ côté IA, environ 12,30€ côté humain (déduit du coût moyen et du taux de déviation à 58%, une estimation assumée). Chaque point de déviation gagné déplace une conversation de 12,30€ vers 0,99€ : c'est le seul levier qui compte.
+        </p>
+
+        <div class="parcours-section reveal" style="--d:.08s;margin:0 auto;max-width:600px;padding-top:0;border-top:none;">
+          <p class="parcours-label" style="text-align:center;">Trajectoire visée</p>
+          <div class="parcours-timeline">
+            <div class="tl-item">
+              <span class="tl-date">M2 · Stabiliser</span>
+              <div>
+                <span class="tl-role">63% de déviation</span>
+                <span class="tl-org">5,50€ par conversation</span>
+              </div>
+            </div>
+            <div class="tl-item">
+              <span class="tl-date">M4 · Déployer</span>
+              <div>
+                <span class="tl-role">72% de déviation</span>
+                <span class="tl-org">4,00€ par conversation · CSAT humain 85% · CSAT IA 72%</span>
+              </div>
+            </div>
+            <div class="tl-item current">
+              <span class="tl-date">M6 · Structurer</span>
+              <div>
+                <span class="tl-role">78% de déviation</span>
+                <span class="tl-org">2,50€ par conversation · CSAT humain 87% · CSAT IA 75%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-stats reveal" style="--d:.16s;margin:48px auto 0;">
+          <div class="stat">
+            <span class="stat-num">-60%</span>
+            <span class="stat-desc">coût par conversation visé</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">~53K€</span>
+            <span class="stat-desc">économie annuelle visée</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">6,3-6,9K€</span>
+            <span class="stat-desc">budget engagé sur 15K€</span>
+          </div>
+        </div>
+
+        <p class="dark-p reveal" style="--d:.2s;margin-top:36px;margin-bottom:0;">
+          Si les API ne sont pas exposables à temps en phase 2, le plan dégrade la cible à 3,00€ à M6, en priorisant l'intégration côté paiement seule. La réserve budgétaire, environ 8 000€, est prévue pour ça.
+        </p>
+      </div>
+    </section>
+
+    <!-- BILAN -->
+    <section class="bilan-section">
+      <div class="container reveal">
+        <div class="bilan-actions" style="margin-top:0;">
+          <a href="https://www.linkedin.com/in/willy-bonneton/" target="_blank" rel="noopener" class="gradient-btn">LinkedIn <span style="font-size:14px">↗</span></a>
+          <a href="index.html#realisations" class="btn-outline-light">Voir les réalisations</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>Willy Bonneton · Lyon</p>
+      <a href="index.html#realisations">← Retour aux réalisations</a>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var header = document.getElementById('site-header');
+      var onScroll = function () {
+        header.classList.toggle('scrolled', window.scrollY > 20);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      var btn = document.querySelector('.mobile-menu-btn');
+      var menu = document.querySelector('.mobile-menu');
+      btn.addEventListener('click', function () {
+        var open = menu.classList.toggle('open');
+        btn.textContent = open ? '✕' : '☰';
+        btn.setAttribute('aria-expanded', open);
+      });
+      menu.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          menu.classList.remove('open');
+          btn.textContent = '☰';
+          btn.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      var reveals = document.querySelectorAll('.reveal');
+      var show = function (el) { el.classList.add('visible'); };
+      if ('IntersectionObserver' in window) {
+        var obs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              show(entry.target);
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.01 });
+        reveals.forEach(function (el) {
+          var rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight && rect.bottom > 0) {
+            show(el);
+          } else {
+            obs.observe(el);
+          }
+        });
+      } else {
+        reveals.forEach(show);
+      }
+    })();
+  </script>
+
+</body>
+</html>
