@@ -150,6 +150,7 @@ img { display: block; max-width: 100%; }
 
 /* ── Animations d'entrée au scroll ── */
 .reveal {
+  min-width: 0;
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1) var(--d, 0s),
@@ -836,6 +837,7 @@ footer a:hover { color: var(--text-light); }
 
 .result-hl {
   flex: 1;
+  min-width: 0;
   text-align: center;
   border-right: 1px solid var(--border-dark);
   padding: 0 12px;
@@ -865,6 +867,7 @@ footer a:hover { color: var(--text-light); }
   letter-spacing: 0.03em;
   text-transform: uppercase;
   line-height: 1.35;
+  overflow-wrap: break-word;
 }
 
 /* Quand les highlights sont seuls dans le bloc (pas de rows) */
