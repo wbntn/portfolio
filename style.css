@@ -1178,6 +1178,7 @@ footer a:hover { color: var(--text-light); }
   border-radius: 16px;
   padding: 32px 34px;
   box-shadow: var(--card-shadow);
+  min-width: 0;
   transition: border-color 0.3s cubic-bezier(0.22,1,0.36,1),
               box-shadow 0.3s cubic-bezier(0.22,1,0.36,1),
               transform 0.3s cubic-bezier(0.22,1,0.36,1);
@@ -1227,10 +1228,14 @@ footer a:hover { color: var(--text-light); }
 .metric-list b { color: var(--text); font-weight: 600; }
 
 /* Tableau comparatif : réservé aux arbitrages réels à 3 options */
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 16px 0 28px;
+}
 .compare-table {
   width: 100%;
   border-collapse: collapse;
-  margin: 16px 0 28px;
   font-size: 13px;
 }
 .compare-table th, .compare-table td {

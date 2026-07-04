@@ -157,18 +157,20 @@
             <span class="method-tag">Méthode · chronométrage du flux existant, poste par poste</span>
             <h3>01 · Préchargement de données</h3>
             <p>J'ai décomposé le flux de traitement d'un cas de double facturation étape par étape. L'agent ouvre l'outil de paiement dans un onglet séparé, cherche le client par email, vérifie les montants, puis ouvre le backoffice pour croiser les données de session. <b>C'est de la récupération d'information</b> : le candidat idéal pour l'automatisation complète. Les situations ambiguës et les décisions nécessitant la validation par seuil sont protégées par la procédure et traité par un agent humain.</p>
-            <table class="compare-table">
-              <thead>
-                <tr><th>Étape</th><th>Avant</th><th>Après</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>Recherche paiement + backoffice</td><td>10-14 min</td><td>0 min</td></tr>
-                <tr><td>Création du ticket</td><td>2-3 min</td><td>0 min</td></tr>
-                <tr><td>Clôture de la conversation</td><td>1-2 min</td><td>0 min</td></tr>
-                <tr><td>Validation humaine (ticket/seuil)</td><td>5-8 min</td><td>5-8 min</td></tr>
-                <tr class="recommended"><td><b>Temps de traitement total</b></td><td><b>~25 min</b></td><td><b>5-8 min</b></td></tr>
-              </tbody>
-            </table>
+            <div class="table-scroll">
+              <table class="compare-table">
+                <thead>
+                  <tr><th>Étape</th><th>Avant</th><th>Après</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Recherche paiement + backoffice</td><td>10-14 min</td><td>0 min</td></tr>
+                  <tr><td>Création du ticket</td><td>2-3 min</td><td>0 min</td></tr>
+                  <tr><td>Clôture de la conversation</td><td>1-2 min</td><td>0 min</td></tr>
+                  <tr><td>Validation humaine (ticket/seuil)</td><td>5-8 min</td><td>5-8 min</td></tr>
+                  <tr class="recommended"><td><b>Temps de traitement total</b></td><td><b>~25 min</b></td><td><b>5-8 min</b></td></tr>
+                </tbody>
+              </table>
+            </div>
             <p>Le nouveau flux déclenche un webhook dès l'assignation : les données client, transaction et session arrivent préchargées dans la conversation en 10 à 30 secondes. Le ticket se crée à la validation de l'agent, la clôture s'automatise après 2 heures d'inactivité.</p>
             <p>Le risque : si l'API backoffice n'expose pas le lien entre l'identifiant de session et la conversation, l'intégration backoffice tombe. Repli : l'intégration paiement seule, qui couvre déjà les deux tiers du gain. Ce levier consomme le seul créneau d'ingénierie disponible sur la période.</p>
           </div>
@@ -192,22 +194,24 @@
             <span class="method-tag">Méthode · grille de comparaison sur 4 dimensions</span>
             <h3>03 · Routing par IA plutôt que par mots-clés</h3>
             <p>Le routing actuel se fait par mots-clés. Il casse dès que le client reformule sans les termes attendus : la conversation part dans la mauvaise file, quelqu'un doit la réaffecter à la main. Trois options possibles pour corriger ça. Je les ai évaluées sur les mêmes critères plutôt que de choisir par intuition :</p>
-            <table class="compare-table">
-              <thead>
-                <tr><th>Approche</th><th>Effort</th><th>Précision</th><th>Risque d'échec</th><th>Coût</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Mots-clés (natif)</td><td>Faible</td><td>Faible</td><td>Élevé : casse sur le paraphrasage</td><td>Inclus</td>
-                </tr>
-                <tr class="recommended">
-                  <td>Routing IA (retenu)</td><td>Modéré : configuration</td><td>Élevée : sémantique</td><td>Faible : repli sur boîte partagée</td><td>Faible à modéré</td>
-                </tr>
-                <tr>
-                  <td>Développement custom</td><td>Élevé : build + infra</td><td>Élevée mais dérive dans le temps</td><td>Élevé : points de rupture multiples</td><td>Modéré, mais consomme le slot ingénierie</td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="table-scroll">
+              <table class="compare-table">
+                <thead>
+                  <tr><th>Approche</th><th>Effort</th><th>Précision</th><th>Risque d'échec</th><th>Coût</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Mots-clés (natif)</td><td>Faible</td><td>Faible</td><td>Élevé : casse sur le paraphrasage</td><td>Inclus</td>
+                  </tr>
+                  <tr class="recommended">
+                    <td>Routing IA (retenu)</td><td>Modéré : configuration</td><td>Élevée : sémantique</td><td>Faible : repli sur boîte partagée</td><td>Faible à modéré</td>
+                  </tr>
+                  <tr>
+                    <td>Développement custom</td><td>Élevé : build + infra</td><td>Élevée mais dérive dans le temps</td><td>Élevé : points de rupture multiples</td><td>Modéré, mais consomme le slot ingénierie</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             <p>La stack est déjà déployée : c'est de la configuration. Et surtout, la base de connaissances alimente à la fois les réponses et le routing : <b>un système unique à maintenir</b>, avec un seuil de confiance à 0,75 en dessous duquel la conversation tombe dans la boîte partagée plutôt que d'être mal assignée. Si le taux de mauvais routage dépasse 15% sur les tags critiques, repli sur un préfiltre mots-clés. Objectif : taux de mauvais routage sous 10%, et une qualité de routing qui s'améliore automatiquement à mesure que la base de connaissances se met à jour, sans système séparé à maintenir.</p>
           </div>
         </div>
