@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Diagnostic et refonte d'une opération Support à l'échelle · Willy Bonneton</title>
-  <meta name="description" content="Cas d'analyse Customer Care Ops : diagnostic data, refonte de workflows et plan de transformation sur 6 mois. Réseau de recharge EV.">
+  <meta name="description" content="Cas construit pour illustrer ma méthode d'analyse Customer Care Ops : diagnostic data, refonte de workflows et plan de transformation sur 6 mois. Réseau de livraison de colis.">
   <link rel="canonical" href="https://willy-bonneton.vercel.app/case-etude-support-ops.html">
 
   <link rel="icon" href="favicon-32.png" type="image/png">
@@ -14,7 +14,7 @@
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Willy Bonneton">
   <meta property="og:title" content="Diagnostic et refonte d'une opération Support à l'échelle · Willy Bonneton">
-  <meta property="og:description" content="Cas d'analyse Customer Care Ops : diagnostic data, refonte de workflows et plan de transformation sur 6 mois. Réseau de recharge EV.">
+  <meta property="og:description" content="Cas construit pour illustrer ma méthode d'analyse Customer Care Ops : diagnostic data, refonte de workflows et plan de transformation sur 6 mois. Réseau de livraison de colis.">
   <meta property="og:url" content="https://willy-bonneton.vercel.app/case-etude-support-ops.html">
   <meta property="og:image" content="https://willy-bonneton.vercel.app/assets/og-image.jpg">
   <meta property="og:image:width" content="1200">
@@ -22,7 +22,7 @@
   <meta property="og:locale" content="fr_FR">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Diagnostic et refonte d'une opération Support à l'échelle · Willy Bonneton">
-  <meta name="twitter:description" content="Cas d'analyse Customer Care Ops : diagnostic data, refonte de workflows et plan de transformation sur 6 mois. Réseau de recharge EV.">
+  <meta name="twitter:description" content="Cas construit pour illustrer ma méthode d'analyse Customer Care Ops : diagnostic data, refonte de workflows et plan de transformation sur 6 mois. Réseau de livraison de colis.">
   <meta name="twitter:image" content="https://willy-bonneton.vercel.app/assets/og-image.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -66,17 +66,17 @@
           <span class="gradient-text">opération Support à l'échelle.</span>
         </h1>
         <p class="hero-body reveal" style="--d:.16s">
-          Cas d'analyse sur un réseau de recharge de véhicules électriques : 340 stations, trois marchés (France, Italie, Espagne), levée de série B. Jeu de données inconnu, fenêtre contrainte à quelques jours. Ce qui suit est le travail livré : diagnostic, refonte de workflows, modélisation économique, plan à 6 mois.
+          Cas construit pour illustrer ma méthode d'analyse, sur un réseau fictif de livraison de colis : 260 points de retrait, trois marchés (France, Allemagne, Pays-Bas), post-levée de série B. Jeu de données et cadrage inventés pour l'exercice, fenêtre contrainte à quelques jours. Ce qui suit est la démarche : diagnostic, refonte de workflows, modélisation économique, plan à 6 mois.
         </p>
         <p class="reveal" style="--d:.2s;font-family:var(--font);font-size:10px;font-weight:500;letter-spacing:0.03em;text-transform:uppercase;color:var(--muted-dark);margin-bottom:12px;">Cadrage du cas</p>
         <div class="hero-stats reveal" style="--d:.24s">
           <div class="stat">
-            <span class="stat-num">340</span>
-            <span class="stat-desc">stations couvertes</span>
+            <span class="stat-num">260</span>
+            <span class="stat-desc">points de retrait couverts</span>
           </div>
           <div class="stat">
             <span class="stat-num">3</span>
-            <span class="stat-desc">marchés · FR IT ES</span>
+            <span class="stat-desc">marchés · FR DE NL</span>
           </div>
           <div class="stat">
             <span class="stat-num">15K€</span>
@@ -178,16 +178,16 @@
           <div class="finding-card reveal span-full" style="--d:.08s">
             <span class="method-tag">Méthode · lecture des conversations réouvertes une par une, au-delà du taux global</span>
             <h3>02 · Correction des workflows défaillants</h3>
-            <p>Le taux de réouverture du workflow qui notifie la remise en service d'une borne (22%, quatre fois le niveau humain) dit qu'il y a un problème, pas lequel. En descendant dans les conversations réouvertes une par une, cinq défauts distincts ressortent :</p>
+            <p>Le taux de réouverture du workflow qui notifie la remise en service d'un casier (22%, quatre fois le niveau humain) dit qu'il y a un problème, pas lequel. En descendant dans les conversations réouvertes une par une, cinq défauts distincts ressortent :</p>
             <ul class="metric-list">
-              <li><b>Signal de statut</b> : la synchronisation tourne toutes les 30 minutes. En cas de coupures successives, la borne retombe hors ligne avant que le client revienne, sur un statut déjà périmé. Correction : cycle sous 5 minutes, message déclenché après 2 cycles stables consécutifs.</li>
+              <li><b>Signal de statut</b> : la synchronisation tourne toutes les 30 minutes. En cas de coupures successives, le casier retombe hors ligne avant que le client revienne, sur un statut déjà périmé. Correction : cycle sous 5 minutes, message déclenché après 2 cycles stables consécutifs.</li>
               <li><b>Périmètre du message</b> : la macro se déclenche sur tout le tag, y compris des cas hors indisponibilité. Correction : détection sémantique du sujet réel avant déclenchement.</li>
-              <li><b>Donnée connecteur</b> : une station donnée "opérationnelle" ne dit rien sur la disponibilité du connecteur précis utilisé par le client. Correction : vérification en temps réel au niveau du connecteur, pas de la station.</li>
+              <li><b>Donnée casier</b> : un point de retrait donné "opérationnel" ne dit rien sur la disponibilité du casier précis utilisé par le client. Correction : vérification en temps réel au niveau du casier, pas du point de retrait.</li>
               <li><b>Fenêtre de clôture</b> : fermeture immédiate, aucune chance de retour pour le client. Correction : clôture différée à 1 heure d'inactivité.</li>
               <li><b>Ton du message</b> : aucune reconnaissance de l'incident vécu. Correction : message réécrit en trois temps, excuse, statut, vérification de facturation.</li>
             </ul>
             <p>L'ordre compte : resserrer le périmètre du message doit précéder le raccourcissement du cycle de statut. Sinon le système confirme plus vite, et envoie le message hors-sujet plus souvent.</p>
-            <p>Objectif : taux de réouverture de 22% à moins de 10%, déflection charging_failed de 76% à 90% à M6.</p>
+            <p>Objectif : taux de réouverture de 22% à moins de 10%, déflection casier_indisponible de 76% à 90% à M6.</p>
           </div>
 
           <div class="finding-card reveal span-full" style="--d:.14s">
