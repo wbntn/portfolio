@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Diagnostic et refonte d'une opération Support à l'échelle · Willy Bonneton</title>
-  <meta name="description" content="Cas d'analyse Customer Care Ops : diagnostic data, refonte de workflows et plan de transformation sur 6 mois. Réseau de recharge EV anonymisé.">
+  <meta name="description" content="Cas d'analyse Customer Care Ops : diagnostic data, refonte de workflows et plan de transformation sur 6 mois. Réseau de recharge EV.">
   <link rel="canonical" href="https://willy-bonneton.vercel.app/case-etude-support-ops.html">
 
   <link rel="icon" href="favicon-32.png" type="image/png">
@@ -14,7 +14,7 @@
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Willy Bonneton">
   <meta property="og:title" content="Diagnostic et refonte d'une opération Support à l'échelle · Willy Bonneton">
-  <meta property="og:description" content="Cas d'analyse Customer Care Ops : diagnostic data, refonte de workflows et plan de transformation sur 6 mois. Réseau de recharge EV anonymisé.">
+  <meta property="og:description" content="Cas d'analyse Customer Care Ops : diagnostic data, refonte de workflows et plan de transformation sur 6 mois. Réseau de recharge EV.">
   <meta property="og:url" content="https://willy-bonneton.vercel.app/case-etude-support-ops.html">
   <meta property="og:image" content="https://willy-bonneton.vercel.app/assets/og-image.jpg">
   <meta property="og:image:width" content="1200">
@@ -22,7 +22,7 @@
   <meta property="og:locale" content="fr_FR">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Diagnostic et refonte d'une opération Support à l'échelle · Willy Bonneton">
-  <meta name="twitter:description" content="Cas d'analyse Customer Care Ops : diagnostic data, refonte de workflows et plan de transformation sur 6 mois. Réseau de recharge EV anonymisé.">
+  <meta name="twitter:description" content="Cas d'analyse Customer Care Ops : diagnostic data, refonte de workflows et plan de transformation sur 6 mois. Réseau de recharge EV.">
   <meta name="twitter:image" content="https://willy-bonneton.vercel.app/assets/og-image.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -66,7 +66,7 @@
           <span class="gradient-text">opération Support à l'échelle.</span>
         </h1>
         <p class="hero-body reveal" style="--d:.16s">
-          Cas d'analyse sur un réseau de recharge de véhicules électriques anonymisé : 340 stations, trois marchés (France, Italie, Espagne), levée de série B. Jeu de données inconnu, fenêtre contrainte à quelques jours. Ce qui suit est le travail livré : diagnostic, refonte de workflows, modélisation économique, plan à 6 mois.
+          Cas d'analyse sur un réseau de recharge de véhicules électriques : 340 stations, trois marchés (France, Italie, Espagne), levée de série B. Jeu de données inconnu, fenêtre contrainte à quelques jours. Ce qui suit est le travail livré : diagnostic, refonte de workflows, modélisation économique, plan à 6 mois.
         </p>
         <p class="reveal" style="--d:.2s;font-family:var(--font);font-size:10px;font-weight:500;letter-spacing:0.03em;text-transform:uppercase;color:var(--muted-dark);margin-bottom:12px;">Cadrage du cas</p>
         <div class="hero-stats reveal" style="--d:.24s">
@@ -119,7 +119,7 @@
           <div class="finding-card reveal">
             <span class="method-tag">Méthode · test croisé sur 2 signaux, saisonnalité contre glissement de volume</span>
             <h3>Le glissement de volume derrière la chute</h3>
-            <p>Si la baisse était saisonnière, deux choses seraient vraies : tous les types de conversation reculeraient de façon comparable, et le taux remonterait en juillet-août. J'ai testé les deux. <b>Aucune des deux conditions ne se vérifie dans les données.</b></p>
+            <p>Si la baisse était saisonnière, deux choses seraient vraies : tous les types de conversation reculeraient de façon comparable, et le taux remonterait en septembre. J'ai testé les deux. <b>Aucune des deux conditions ne se vérifie dans les données.</b></p>
             <p>Les tags <em>payment_issue</em> et <em>refund_request</em> passent de 43% à 63% du volume total entre janvier-mars et avril-juin, soit +20 points. Ce sont les deux tags à la plus faible déviation de tout le catalogue : 30% et 14%. L'IA n'était pas réentraînée sur la nouvelle solution de paiement. Elle n'avait rien à récupérer. Elle escaladait tout.</p>
           </div>
 
@@ -132,13 +132,13 @@
         </div>
 
         <div class="reveal" style="--d:.14s;max-width:760px;margin:40px auto 0;">
-          <p style="font-size:14.5px;color:#3D5568;line-height:1.82;">À partir de ce diagnostic, j'ai proposé cinq métriques de remplacement, pensées pour ne pas dépendre de la volonté du client à répondre à un sondage :</p>
+          <p style="font-size:14.5px;color:#3D5568;line-height:1.82;">À partir de ce diagnostic, j'ai proposé cinq métriques hebdomadaires de remplacement, pensées pour ne pas dépendre de la volonté du client à répondre à un sondage :</p>
           <ul class="metric-list">
             <li><b>Déviation par tag</b> : isole les thématiques en difficulté avant que l'agrégat ne se dégrade</li>
             <li><b>Taux d'escalade IA</b> : mesure directe de l'échec, sans dépendre du comportement client</li>
-            <li><b>Vrai taux de résolution IA</b> : une conversation IA réouverte sous 48h n'est pas résolue</li>
+            <li><b>Taux de réouverture IA</b> : une conversation IA réouverte sous 48h n'est pas résolue</li>
             <li><b>CSAT IA et CSAT humain, suivis séparément</b> : les agréger masque le signal le plus utile</li>
-            <li><b>Taux de contact hebdomadaire</b> : le signal le plus en amont, avant même l'intervention de l'IA</li>
+            <li><b>Taux de contact</b> : le signal le plus en amont, avant même l'intervention de l'IA</li>
           </ul>
         </div>
       </div>
@@ -156,7 +156,7 @@
           <div class="finding-card reveal span-full">
             <span class="method-tag">Méthode · chronométrage du flux existant, poste par poste</span>
             <h3>01 · Préchargement de données</h3>
-            <p>J'ai décomposé le flux de traitement d'un cas de double facturation étape par étape. L'agent ouvre l'outil de paiement dans un onglet séparé, cherche le client par email, vérifie les montants, puis ouvre le backoffice pour croiser les données de session. <b>C'est de la récupération d'information</b> : le candidat idéal pour l'automatisation complète. Les situations ambiguës et les décisions nécessitant la validation par seuil sont protégées par la procédure et traité par un agent humain.</p>
+            <p>J'ai décomposé le flux de traitement d'un cas de double facturation étape par étape. L'agent ouvre l'outil de paiement dans un onglet séparé, cherche le client par email, vérifie les montants, puis ouvre le backoffice pour croiser les données de session. <b>C'est de la récupération d'information</b> : le candidat idéal pour l'automatisation complète. Les situations ambiguës et les décisions nécessitant la validation par seuil sont protégées par la procédure et traitées par un agent humain.</p>
             <div class="table-scroll">
               <table class="compare-table">
                 <thead>
@@ -186,7 +186,7 @@
               <li><b>Fenêtre de clôture</b> : fermeture immédiate, aucune chance de retour pour le client. Correction : clôture différée à 1 heure d'inactivité.</li>
               <li><b>Ton du message</b> : aucune reconnaissance de l'incident vécu. Correction : message réécrit en trois temps, excuse, statut, vérification de facturation.</li>
             </ul>
-            <p>L'ordre compte : resserrer le périmètre du message doit précéder le raccourcissement du cycle de statut. Sinon le système confirme plus vite, et envoie le message hors-sujet plus souvent, pas moins.</p>
+            <p>L'ordre compte : resserrer le périmètre du message doit précéder le raccourcissement du cycle de statut. Sinon le système confirme plus vite, et envoie le message hors-sujet plus souvent.</p>
             <p>Objectif : taux de réouverture de 22% à moins de 10%, déflection charging_failed de 76% à 90% à M6.</p>
           </div>
 
@@ -226,7 +226,7 @@
           <h2>SOP et base de connaissances</h2>
         </div>
 
-        <p class="reveal" style="max-width:760px;margin:0 auto 40px;font-size:14.5px;color:#3D5568;line-height:1.82;text-align:center;">Même cause profonde, deux niveaux : le SOP corrige la justesse du process, la base de connaissances corrige ce que l'IA peut récupérer.</p>
+        <p class="reveal" style="max-width:760px;margin:0 auto 40px;font-size:14.5px;color:#3D5568;line-height:1.82;text-align:center;">Même cause profonde, deux niveaux : le SOP (standard operating procedures) corrige la justesse du process, la base de connaissances corrige ce que l'IA peut récupérer.</p>
 
         <div class="two-col-grid">
           <div class="finding-card reveal span-full">
@@ -240,7 +240,7 @@
             </ul>
             <p>Le SOP existant n'a ni seuil d'autorisation, ni instruction d'outil, ni propriétaire nommé pour distinguer ces trois cas. Un même flux pour trois opérations différentes produit soit un remboursement là où il fallait juste relâcher une autorisation, soit un blocage sur un cas qui ne demandait qu'un recalcul.</p>
             <p>La réécriture distingue les trois scénarios en arbres de décision séparés, avec une autorisation à trois paliers : sous 30€, l'agent traite seul ; au-delà, validation senior ; en cas d'ambiguïté persistante, remontée au manager. Ce seuil de 30€ vient de la fourchette des articles en conflit (15€ contre 30€) : à confirmer avec le remboursement moyen réel et le taux de complétion des sessions. Cinq modèles de communication par issue possible, une fiche de métadonnées par scénario : propriétaire, date de mise à jour, déclencheur de révision.</p>
-            <p>Chaque arbre pointe l'outil et le champ exact. Pour une pré-autorisation bloquée, l'agent va chercher le statut "hold" dans le backoffice et clique sur "release", pas "refund". Avant la réécriture, rien n'empêchait de traiter ce cas comme un remboursement classique, et de l'argent part alors que rien n'avait été prélevé. Ce type d'erreur devient structurellement impossible.</p>
+            <p>Chaque arbre pointe l'outil et le champ exact. Pour une pré-autorisation bloquée, l'agent va chercher le statut "hold" dans le backoffice et clique sur "release", pas "refund". Avant la réécriture, rien n'empêchait de traiter ce cas comme un remboursement classique, une erreur coûteuse se produisait alors qu'aucun prélèvement n'avait eu lieu. Ce type d'erreur devient structurellement impossible.</p>
           </div>
 
           <div class="finding-card reveal span-full" style="--d:.08s">
@@ -248,7 +248,7 @@
             <h3>Gouvernance de la base de connaissances</h3>
             <p>En passant les 52 articles au crible (statut de synchronisation, seuils cités, date de dernière modification), trois problèmes ressortent : 23 seulement synchronisés avec l'IA, 9 avec des seuils contradictoires d'un article à l'autre (15€ contre 30€ pour le même cas), zéro mise à jour au lancement de la nouvelle solution de paiement. <b>Le seuil de 30€ retenu pour le SOP est directement issu de cet audit.</b></p>
             <p>L'architecture : six dossiers de premier niveau organisés par domaine produit (Général, Utilisateurs, Stations &amp; Usage, Paiements &amp; Facturation, Outils, Glossaire), les dossiers principaux dotés d'un sous-dossier Releases : l'endroit où les changements KB d'un prochain lancement produit se préparent avant le go-live.</p>
-            <p>Gouvernance : un propriétaire nommé par dossier et par article, sous un propriétaire exécutif arbitre en dernier ressort. Contrôle d'accès à quatre niveaux : lecture seule pour les agents BPO et l'IA, commentaire pour les parties prenantes internes, édition pour les propriétaires thématiques, administration pour l'arbitre final — flag de conflit visible par tous les éditeurs, logs d'audit complets sur toute modification.</p>
+            <p>Gouvernance : un propriétaire nommé par dossier et par article, sous un propriétaire exécutif arbitre en dernier ressort. Contrôle d'accès à quatre niveaux : lecture seule pour les agents BPO et l'IA, commentaire pour les parties prenantes internes, édition pour les propriétaires thématiques, administration pour l'arbitre final. Flag de conflit visible par tous les éditeurs, logs d'audit complets sur toute modification.</p>
             <p>Cinq déclencheurs cadrent la mise à jour :</p>
             <ul class="metric-list">
               <li><b>Avant chaque lancement produit</b> : articles confirmés et IA testée, condition de passage en production.</li>
@@ -257,7 +257,7 @@
               <li><b>Par propriétaire thématique</b> : revue mensuelle.</li>
               <li><b>Sur l'ensemble des 52 articles</b> : audit trimestriel complet.</li>
             </ul>
-            <p>Le point de bascule : la porte de lancement Releases empêche qu'un futur lancement casse la base de connaissances comme la nouvelle solution de paiement l'a fait en mai. La gouvernance tient sur le système, pas sur la bonne volonté de chacun.</p>
+            <p>Le point de bascule : la porte de lancement Releases empêche qu'un futur lancement casse la base de connaissances comme la nouvelle solution de paiement l'a fait en mai. La gouvernance tient sur le système.</p>
           </div>
         </div>
       </div>
@@ -274,7 +274,7 @@
         </div>
 
         <p class="dark-p reveal">
-          Le coût par conversation est le fil rouge de la trajectoire. En janvier 2026, la moyenne est de 6,20€ : 0,99€ côté IA, environ 12,30€ côté humain (déduit du coût moyen et du taux de déviation à 58%, une estimation assumée). Chaque point de déviation gagné déplace une conversation de 12,30€ vers 0,99€ : c'est le seul levier qui compte.
+          Le coût par conversation est le fil rouge de la trajectoire. En janvier 2026, la moyenne est de 6,20€ : 0,99€ côté IA, environ 12,30€ côté humain (déduit du coût moyen et du taux de déviation à 58%). Chaque point de déviation gagné déplace une conversation de 12,30€ vers 0,99€ : c'est le seul levier qui compte.
         </p>
 
         <div class="parcours-section reveal" style="--d:.08s;margin:0 auto;max-width:600px;padding-top:0;border-top:none;">
