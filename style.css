@@ -1237,6 +1237,15 @@ footer a:hover { color: var(--text-light); }
   line-height: 1.4;
 }
 
+.tl-stat {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--accent);
+  line-height: 1.4;
+  margin-top: 3px;
+}
+
 .case-cta { margin-top: 24px; }
 
 .bilan-section {
