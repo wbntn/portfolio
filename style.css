@@ -737,11 +737,6 @@ footer a:hover { color: var(--text-light); }
   min-height: 100vh;
 }
 
-.about-parcours-bottom {
-  min-height: auto;
-  padding: 64px 0 104px;
-}
-
 .about-hero .container { position: relative; z-index: 1; }
 
 .about-hero h1 {
